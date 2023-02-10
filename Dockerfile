@@ -3,7 +3,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.15
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG BEETS_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="aptalca"
 
@@ -80,15 +79,11 @@ RUN \
   make && \
   make install && \
   echo "**** install pip packages ****" && \
-  if [ -z ${BEETS_VERSION+x} ]; then \
-    BEETS_VERSION=$(curl -sL  https://pypi.python.org/pypi/beets/json \
-    |jq -r '. | .info.version'); \
-  fi && \
   python3 -m pip install --upgrade pip && \
   pip3 install -U --no-cache-dir --find-links https://wheel-index.linuxserver.io/alpine/ \
     wheel \
     beautifulsoup4 \
-    beets==${BEETS_VERSION} \
+    git+https://github.com/jpluscplusm/beets.git@jcm_fix_albumtypes \
     beets-extrafiles \
     discogs-client \
     flask \
