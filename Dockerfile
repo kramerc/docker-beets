@@ -74,12 +74,12 @@ RUN \
     git+https://github.com/beetbox/beets.git@2e18f84b380911c1d3ec2e5b76513b3924db2188 \
     beets-extrafiles \
     beetcamp \
-    discogs-client \
     flask \
     PyGObject \
     pillow \
     pyacoustid \
     pylast \
+    python3-discogs-client \
     requests \
     unidecode && \
   echo "**** cleanup ****" && \
